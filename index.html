@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanMitra - Your Personal Farming Assistant</title>
+    <meta name="description" content="KisanMitra: Your personal farming assistant offering expert, practical advice for every stage of your agricultural journey">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <a href="/" class="flex items-center">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-2">
+              <i class="fas fa-leaf text-white text-lg"></i>
+            </div>
+            <span class="text-xl font-bold bg-gradient-to-r from-green-600 to-yellow-500 bg-clip-text text-transparent">KisanMitra</span>
+          </a>
+          <div class="hidden md:flex space-x-8">
+            <a href="#features" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Features</a>
+            <a href="#farmers" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Farmers</a>
+            <a href="#reviews" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Reviews</a>
+            <a href="#weather" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Weather</a>
+            <a href="#about" class="text-gray-600 hover:text-green-600 font-medium transition-colors">About</a>
+          </div>
+          <button id="mobileMenuToggle" class="md:hidden text-gray-600 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+        <div class="md:hidden hidden flex-col space-y-4 pb-4" id="mobileMenu">
+          <a href="#features" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Features</a>
+          <a href="#farmers" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Farmers</a>
+          <a href="#reviews" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Reviews</a>
+          <a href="#weather" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Weather</a>
+          <a href="#about" class="text-gray-600 hover:text-green-600 font-medium transition-colors">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center" role="banner">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-400 to-green-600 animate-gradient-x"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.15)_0%,_transparent_70%)]"></div>
+      </div>
+      <div class="hero-background"></div>
+      <!-- Floating Icons -->
+      <i class="fas fa-leaf hero-floating-icon" style="top: 10%; left: 15%;"></i>
+      <i class="fas fa-tractor hero-floating-icon" style="top: 20%; right: 5%; animation-delay: 2s;"></i>
+      <i class="fas fa-seedling hero-floating-icon" style="bottom: 15%; left: 10%; animation-delay: 2s;"></i>
+      <div class="container mx-auto max-w-6xl px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Text Content -->
+          <div class="text-left">
+            <h1 class="hero-title text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white animate__animated animate__fadeInDown">
+              Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-green-300">Farming Partner</span><br>
+              नमस्ते किसान मित्र!
+            </h1>
+            <p class="hero-tagline text-lg sm:text-xl text-white/90 mb-8 max-w-md" id="heroTagline" aria-describedby="heroTagline">
+              Expert agricultural advice and support tailored to Indian farmers
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 mb-8 sticky top-4">
+              <button class="btn-primary px-6 py-3 rounded-full text-lg font-medium">
+                Get Started <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button class="border-2 border-yellow-300 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-green-300/10">
+                <i class="fas fa-play mr-2"></i> Watch Demo
+              </button>
+            </div>
+            <!-- Stats -->
+            <div class="hero-stats animate__animated animate__fadeInUp">
+              <div>
+                <span class="text-2xl font-bold text-white">120M+</span>
+                <p class="text-sm text-white/80">Indian Farmers</p>
+              </div>
+              <div>
+                <span class="text-2xl font-bold text-white">24/7</span>
+                <p class="text-sm text-white/80">Support Available</p>
+              </div>
+              <div>
+                <span class="text-2xl font-bold text-white">100%</span>
+                <p class="text-sm text-white/80">Farmer Approved</p>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel -->
+          <div class="hero-carousel h-64 sm:h-80 lg:h-96">
+            <div class="carousel-image active">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Indian farmer working in field" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eHero Image%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="carousel-image">
+              <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Indian farmer using modern technology" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eTechnology Image%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="carousel-image">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Indian farmer harvesting crops" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eHarvest Image%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="carousel-nav">
+              <span class="carousel-dot active" aria-label="Go to slide 1"></span>
+              <span class="carousel-dot" aria-label="Go to slide 2"></span>
+              <span class="carousel-dot" aria-label="Go to slide 3"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wave Divider -->
+    <div class="wave-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="bg-green-100 text-green-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">WHY CHOOSE US</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Empowering Indian Farmers</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">KisanMitra brings modern technology and traditional farming wisdom together to help you grow better crops and increase your income.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-cloud-sun-rain"></i>
+            </div>
+            <h3 class="feature-title">Weather Forecasts</h3>
+            <p class="feature-desc">Accurate 7-day weather forecasts for your region to help plan farming activities</p>
+          </div>
+          
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h3 class="feature-title">Crop Recommendations</h3>
+            <p class="feature-desc">Get crop suggestions based on your soil type, climate and market demand</p>
+          </div>
+          
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-tractor"></i>
+            </div>
+            <h3 class="feature-title">Modern Techniques</h3>
+            <p class="feature-desc">Learn about modern sustainable farming methods to increase yield and profit</p>
+          </div>
+          
+          <!-- Feature 4 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Market Prices</h3>
+            <p class="feature-desc">Stay updated with latest market prices for your crops in nearby mandis</p>
+          </div>
+        </div>
+        
+        <div class="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+            <div class="relative aspect-video">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" alt="Indian farmer using AI assistant" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAI Assistant Image%3c/text%3e%3c/svg%3e'">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                <div class="p-6">
+                  <span class="text-white/80 text-sm">DIGITAL AGRICULTURE</span>
+                  <h3 class="text-white text-xl font-bold">AI-Powered Farming Assistant</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <span class="bg-yellow-100 text-yellow-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">AI TECHNOLOGY</span>
+            <h2 class="text-3xl font-bold mb-6">Your 24/7 Farming Expert</h2>
+            <p class="text-gray-600 mb-6">Our AI-powered virtual assistant can answer your farming questions anytime, anywhere. Get expert advice on pest control, irrigation, fertilizers, and more in your language.</p>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <div class="bg-green-100 rounded-full p-1 mr-3 mt-1">
+                  <i class="fas fa-check text-green-600 text-sm"></i>
+                </div>
+                <span>Voice-enabled in Hindi and English</span>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-green-100 rounded-full p-1 mr-3 mt-1">
+                  <i class="fas fa-check text-green-600 text-sm"></i>
+                </div>
+                <span>Research-backed advice tailored to Indian agriculture</span>
+              </li>
+              <li class="flex items-start">
+                <div class="bg-green-100 rounded-full p-1 mr-3 mt-1">
+                  <i class="fas fa-check text-green-600 text-sm"></i>
+                </div>
+                <span>Works offline for areas with limited connectivity</span>
+              </li>
+            </ul>
+            
+            <button class="mt-8 btn-secondary px-6 py-3 rounded-lg font-medium flex items-center">
+              Try the AI Assistant <i class="fas fa-robot ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Farmers Section -->
+    <section id="farmers" class="farmers-section py-20 bg-green-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="bg-yellow-100 text-yellow-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">SUCCESS STORIES</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Farmers</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">These farmers have improved their yields and livelihoods with help from KisanMitra's technology and advisory services.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Farmer 1 -->
+          <div class="farmer-card group hover:shadow-lg transition-shadow duration-300">
+            <div class="farmer-image overflow-hidden">
+              <img src="Rajesh.jpg" alt="Rajesh Patel from Gujarat" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eRajesh Patel%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="farmer-info p-6">
+              <h3 class="text-xl font-bold mb-2">Rajesh Patel</h3>
+              <div class="flex items-center text-sm text-gray-600 mb-2">
+                <i class="fas fa-map-marker-alt mr-2 text-green-600"></i>
+                Gujarat
+              </div>
+              <div class="flex items-center text-sm text-gray-600 mb-4">
+                <i class="fas fa-wheat-awn mr-2 text-green-600"></i>
+                Cotton & Groundnut | 10 Acres
+              </div>
+              <p class="text-sm text-gray-600">Switched to organic farming with KisanMitra's guidance. Saw 40% increase in profit with premium market access.</p>
+            </div>
+          </div>
+          
+          <!-- Farmer 2 -->
+          <div class="farmer-card group hover:shadow-lg transition-shadow duration-300">
+            <div class="farmer-image overflow-hidden">
+              <img src="https://images.pexels.com/photos/20527529/pexels-photo-20527529.jpeg" alt="Lakshmi Devi from Tamil Nadu" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eLakshmi Devi%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="farmer-info p-6">
+              <h3 class="text-xl font-bold mb-2">Lakshmi Devi</h3>
+              <div class="flex items-center text-sm text-gray-600 mb-2">
+                <i class="fas fa-map-marker-alt mr-2 text-green-600"></i>
+                Tamil Nadu
+              </div>
+              <div class="flex items-center text-sm text-gray-600 mb-4">
+                <i class="fas fa-wheat-awn mr-2 text-green-600"></i>
+                Rice & Vegetables | 5 Acres
+              </div>
+              <p class="text-sm text-gray-600">Implemented drip irrigation based on app recommendations. Reduced water usage by 30% while improving yield.</p>
+            </div>
+          </div>
+          
+          <!-- Farmer 3 -->
+          <div class="farmer-card group hover:shadow-lg transition-shadow duration-300">
+            <div class="farmer-image overflow-hidden">
+              <img src="Ramu.jpg" alt="Amarjeet Singh from Punjab" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAmarjeet Singh%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="farmer-info p-6">
+              <h3 class="text-xl font-bold mb-2">Amarjeet Singh</h3>
+              <div class="flex items-center text-sm text-gray-600 mb-2">
+                <i class="fas fa-map-marker-alt mr-2 text-green-600"></i>
+                Punjab
+              </div>
+              <div class="flex items-center text-sm text-gray-600 mb-4">
+                <i class="fas fa-wheat-awn mr-2 text-green-600"></i>
+                Wheat & Pulses | 15 Acres
+              </div>
+              <p class="text-sm text-gray-600">Used KisanMitra's soil testing and weather forecast to optimize planting. Reduced crop losses during unseasonal rains.</p>
+            </div>
+          </div>
+          
+          <!-- Farmer 4 -->
+          <div class="farmer-card group hover:shadow-lg transition-shadow duration-300">
+            <div class="farmer-image overflow-hidden">
+              <img src="Menna.jpeg" alt="Meena Kumari from Uttar Pradesh" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eMeena Kumari%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="farmer-info p-6">
+              <h3 class="text-xl font-bold mb-2">Meena Kumari</h3>
+              <div class="flex items-center text-sm text-gray-600 mb-2">
+                <i class="fas fa-map-marker-alt mr-2 text-green-600"></i>
+                Uttar Pradesh
+              </div>
+              <div class="flex items-center text-sm text-gray-600 mb-4">
+                <i class="fas fa-wheat-awn mr-2 text-green-600"></i>
+                Sugarcane & Mustard | 8 Acres
+              </div>
+              <p class="text-sm text-gray-600">First-time smartphone user who learned about optimal fertilizer timing through voice guidance in Hindi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Statistics Section -->
+    <section id="statistics" class="statistics-section py-20 relative">
+      <div class="stats-bg"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="mb-16 text-center">
+          <span class="bg-green-100 text-green-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">OUR IMPACT</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Growing Together</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Our technology has helped transform thousands of farms across India, bringing knowledge and prosperity to rural communities.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Stat 1 -->
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-number" data-count="25000">0</div>
+            <div class="stat-label">Farmers Onboarded</div>
+          </div>
+          
+          <!-- Stat 2 -->
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <div class="stat-number" data-count="15">0</div>
+            <div class="stat-label">States Covered</div>
+          </div>
+          
+          <!-- Stat 3 -->
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-seedling"></i></div>
+            <div class="stat-number" data-count="45">0</div>
+            <div class="stat-label">Crop Varieties</div>
+          </div>
+          
+          <!-- Stat 4 -->
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-number" data-count="35">0</div>
+            <div class="stat-label">% Avg. Yield Increase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews" class="reviews-section py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="bg-yellow-100 text-yellow-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">TESTIMONIALS</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">What Farmers Say</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Hear about real experiences from farmers who use KisanMitra to transform their agricultural practices.</p>
+        </div>
+        
+        <div class="reviews-carousel relative">
+          <div class="review-track flex transition-transform duration-500">
+            <!-- Review 1 -->
+            <div class="review-card">
+              <div class="review-content">
+                <div class="review-stars mb-4">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="review-text">"KisanMitra helped me understand what was causing my tomato plants to wilt. I followed their advice and saved my entire crop. The weather alerts also warn me before storms so I can prepare."</p>
+                <div class="review-author mt-6 flex items-center">
+                  <div class="review-author-img w-12 h-12 rounded-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Ramesh Kumar" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eReview 1%3c/text%3e%3c/svg%3e'">
+                  </div>
+                  <div class="ml-3">
+                    <div class="review-author-name">Ramesh Kumar</div>
+                    <div class="review-author-location">Madhya Pradesh</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Review 2 -->
+            <div class="review-card">
+              <div class="review-content">
+                <div class="review-stars mb-4">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star-half-alt text-yellow-400"></i>
+                </div>
+                <p class="review-text">"I don't read well, but the voice chat lets me ask farming questions in my language. It even helped me identify a better market for my vegetables, increasing my income by 8,000 rupees last month!"</p>
+                <div class="review-author mt-6 flex items-center">
+                  <div class="review-author-img w-12 h-12 rounded-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" alt="Sunita Devi" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eReview 2%3c/text%3e%3c/svg%3e'">
+                  </div>
+                  <div class="ml-3">
+                    <div class="review-author-name">Sunita Devi</div>
+                    <div class="review-author-location">Bihar</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Review 3 -->
+            <div class="review-card">
+              <div class="review-content">
+                <div class="review-stars mb-4">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="review-text">"My son convinced me to try this app. At first I was hesitant, but now I check it every morning. The pest alerts helped me prevent bollworm infestation in my cotton, saving me from huge losses."</p>
+                <div class="review-author mt-6 flex items-center">
+                  <div class="review-author-img w-12 h-12 rounded-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Harinder Singh" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eReview 3%3c/text%3e%3c/svg%3e'">
+                  </div>
+                  <div class="ml-3">
+                    <div class="review-author-name">Harinder Singh</div>
+                    <div class="review-author-location">Haryana</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="prev-btn carousel-control left-4">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          
+          <button class="next-btn carousel-control right-4">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          
+          <div class="carousel-dots mt-8 flex justify-center gap-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Weather Section -->
+    <section id="weather" class="weather-section py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <span class="bg-blue-100 text-blue-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">WEATHER FORECAST</span>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Local Weather Updates</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Check your local 7-day weather forecast to help you plan your farming activities.</p>
+        </div>
+        
+        <div class="weather-card-container">
+          <!-- Weather Card -->
+          <div class="weather-card">
+            <div class="location-search">
+              <div class="input-group">
+                <i class="fas fa-search input-icon"></i>
+                <input type="text" id="location-input" placeholder="Enter your city or district" class="location-input">
+                <button id="search-button"><i class="fas fa-arrow-right"></i></button>
+              </div>
+            </div>
+            
+            <div class="weather-main" id="weather-main">
+              <div class="text-center py-8">
+                <i class="fas fa-cloud-sun text-5xl text-blue-500 mb-4"></i>
+                <p class="text-gray-600">Enter your location to see weather details</p>
+              </div>
+            </div>
+            
+            <div class="weather-forecast" id="weather-forecast">
+              <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="weather-tips">
+              <h4 class="weather-tips-title"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i> Farming Tips</h4>
+              <ul class="weather-tips-list" id="weather-tips-list">
+                <li>Check soil moisture before irrigation to save water</li>
+                <li>Plan your harvesting on clear days to ensure crop quality</li>
+                <li>Cover young plants if temperatures drop below 10°C</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    
+    <!-- About Section -->
+    <section id="about" class="about-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="bg-green-100 text-green-800 rounded-full px-4 py-1 text-sm font-medium inline-block mb-4">ABOUT US</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
+                    <p class="text-gray-600 mb-6">KisanMitra was founded with a simple goal: to make modern agricultural knowledge and technology accessible to every Indian farmer, regardless of farm size, education level, or digital literacy.</p>
+                    <p class="text-gray-600 mb-6">We believe that technology, when properly adapted to local needs, can dramatically improve farming outcomes and rural livelihoods across India.</p>
+                    <p class="text-gray-600 mb-6">Our team combines expertise in agriculture, technology, and rural development to create solutions that are practical, affordable, and culturally appropriate.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                        <a href="#" class="btn-secondary px-6 py-3 rounded-lg font-medium flex items-center justify-center">
+                            Our Team <i class="fas fa-users ml-2"></i>
+                        </a>
+                        <a href="#" class="border border-gray-300 px-6 py-3 rounded-lg font-medium flex items-center justify-center hover:bg-gray-50">
+                            Contact Us <i class="fas fa-envelope ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+              
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div class="about-image-1 rounded-xl overflow-hidden shadow-lg h-64 group hover:shadow-xl transition-shadow duration-300">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Farmer using smartphone app" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAbout 1%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="about-image-2 rounded-xl overflow-hidden shadow-lg h-64 transform translate-y-8 group hover:shadow-xl transition-shadow duration-300">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" alt="Rural farming landscape" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAbout 2%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="about-image-3 rounded-xl overflow-hidden shadow-lg h-64 transform translate-y-4 group hover:shadow-xl transition-shadow duration-300">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000" alt="Farmer with modern equipment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAbout 3%3c/text%3e%3c/svg%3e'">
+            </div>
+            <div class="about-image-4 rounded-xl overflow-hidden shadow-lg h-64 transform -translate-y-4 group hover:shadow-xl transition-shadow duration-300">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" alt="Crop analysis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3e%3ctext x=%2250%22 y=%2250%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23999%22%3eAbout 4%3c/text%3e%3c/svg%3e'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section py-20 bg-gradient-to-r from-green-600 to-green-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Farming?</h2>
+          <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">Join thousands of Indian farmers who are increasing their yields and income with KisanMitra</p>
+          <button class="btn-white px-8 py-4 rounded-full text-lg font-medium">
+            Get Started For Free <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </section>
+
+    <!-- Footer -->
+    <footer class="footer-section bg-gray-900 text-white py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mr-2">
+                <i class="fas fa-leaf text-white text-lg"></i>
+              </div>
+              <span class="text-2xl font-bold text-white">KisanMitra</span>
+            </div>
+            <p class="text-gray-400 mb-6">Your farming partner, helping Indian farmers prosper through technology and expert guidance.</p>
+            <div class="social-links flex gap-4">
+              <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#farmers">Our Farmers</a></li>
+              <li><a href="#weather">Weather</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="#">Crop Calendar</a></li>
+              <li><a href="#">Pest Control Guide</a></li>
+              <li><a href="#">Market Prices</a></li>
+              <li><a href="#">Government Schemes</a></li>
+              <li><a href="#">Farm Equipment</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Contact Us</h4>
+            <ul class="footer-contact">
+              <li>
+                <i class="fas fa-map-marker-alt text-green-500 mr-3"></i>
+                KisanMitra HQ, Tech Park, Bangalore 560103
+              </li>
+              <li>
+                <i class="fas fa-phone text-green-500 mr-3"></i>
+                +91 8800 123 456
+              </li>
+              <li>
+                <i class="fas fa-envelope text-green-500 mr-3"></i>
+                support@kisanmitra.in
+              </li>
+            </ul>
+            
+            <div class="mt-6">
+              <h4 class="text-sm font-semibold mb-3">Download Our App</h4>
+              <div class="flex gap-3">
+                <a href="#" class="app-badge">
+                  <img src="images/google-play-badge.png" alt="Get it on Google Play">
+                </a>
+                <a href="#" class="app-badge">
+                  <img src="images/app-store-badge.png" alt="Download on App Store">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm">© 2023 KisanMitra. All rights reserved.</p>
+          <div class="flex gap-6 mt-4 md:mt-0">
+            <a href="#" class="text-gray-500 text-sm hover:text-white">Privacy Policy</a>
+            <a href="#" class="text-gray-500 text-sm hover:text-white">Terms of Service</a>
+            <a href="#" class="text-gray-500 text-sm hover:text-white">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Chatbot Backdrop -->
+    <div id="chatbot-backdrop" class="chatbot-backdrop"></div>
+
+    <!-- Chatbot Interface -->
+    <div id="chatbot-toggle" class="chatbot-toggle">
+      <i class="fas fa-robot"></i>
+    </div>
+    
+    <div id="chatbot-interface" class="chatbot-interface">
+      <div class="chatbot-header">
+        <div class="flex items-center">
+          <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-2">
+            <i class="fas fa-robot text-white"></i>
+          </div>
+          <h3>KisanMitra AI Assistant</h3>
+        </div>
+        <button id="close-chatbot" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message bot-message">
+          <div class="message-content">
+            <p>नमस्ते! Hello! I'm your KisanMitra assistant. Ask me any questions about farming, crops, weather, or agricultural practices. I'm here to help!</p>
+          </div>
+          <div class="message-time">Just now</div>
+        </div>
+      </div>
+      
+      <div class="chatbot-input">
+        <input type="text" id="user-input" placeholder="Type your question here..." class="flex-grow px-4 py-2 rounded-lg">
+        <button id="voice-input" class="chatbot-voice-btn">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <button id="send-message" class="chatbot-send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/gemini-api.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html> 
